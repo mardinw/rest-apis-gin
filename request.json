@@ -1,0 +1,8 @@
+{
+  "product_code":12345,
+  "product_name":"kopi susu",
+  "quantity": 12,
+  "size_type_id": 1,
+  "category_id": 1,
+  "active":false
+}

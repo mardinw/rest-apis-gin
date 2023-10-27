@@ -1,0 +1,1934 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {
+            "name": "API Support",
+            "email": "cs@payuoge.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "paths": {
+        "/auth/add-user-groups": {
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do add user to group",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Add user to group process",
+                "parameters": [
+                    {
+                        "description": "user add to group",
+                        "name": "addUserToGroup",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dtos.UpdateGroup"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "user success to add group",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "Error Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/confirm": {
+            "post": {
+                "description": "do confirmation account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Confirmation SignUp access process",
+                "parameters": [
+                    {
+                        "description": "used for confirmation an account",
+                        "name": "confirmData",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dtos.AuthCodeData"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "redirect to home",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Error Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/forgot": {
+            "post": {
+                "description": "do forgot password to an account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "ForgotPassword process",
+                "parameters": [
+                    {
+                        "description": "used for forgot password",
+                        "name": "forgotData",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dtos.Users"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "send code confirmation for forgot password",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "Error Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/google": {
+            "get": {
+                "description": "do logout account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Login google access process",
+                "responses": {
+                    "200": {
+                        "description": "logged in via google successfully",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "cookie not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/list-groups": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do list groups",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "list group process",
+                "responses": {
+                    "200": {
+                        "description": "list group",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "Error Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "description": "do login account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Login access process",
+                "parameters": [
+                    {
+                        "description": "login data",
+                        "name": "login",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dtos.AuthData"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the message success responses",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "Error Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/logout": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do logout account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Logout access process",
+                "responses": {
+                    "200": {
+                        "description": "logged out successfully",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "cookie not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "description": "do register account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Register access process",
+                "parameters": [
+                    {
+                        "description": "used for register",
+                        "name": "registerData",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dtos.AuthData"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "send code confirmation",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "Error Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/resend": {
+            "post": {
+                "description": "do resend code to an account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "ResendCode process",
+                "parameters": [
+                    {
+                        "description": "used for resend code",
+                        "name": "resendCode",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dtos.Users"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "check inbox email address",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "Error Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/reset": {
+            "post": {
+                "description": "do reset password to an account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "ResetPassword process",
+                "parameters": [
+                    {
+                        "description": "used for reset password",
+                        "name": "resetPassword",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dtos.AuthResetData"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "send for reset password",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "Error Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/groceries/operational": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do Get all operational",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "groceries"
+                ],
+                "summary": "GetAllOperational access process",
+                "responses": {
+                    "200": {
+                        "description": "the message successfully create",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "Error Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do create a operational",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "groceries"
+                ],
+                "summary": "CreateOperational access process",
+                "parameters": [
+                    {
+                        "description": "create a operational",
+                        "name": "operational",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dtos.Operate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the message successfully create",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "Error Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/groceries/operational/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do Get ID operational",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "groceries"
+                ],
+                "summary": "GetIDOperational access process",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id operational",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "put": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do Update a operational",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "groceries"
+                ],
+                "summary": "UpdateOperational access process",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id operational",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "update a operational",
+                        "name": "operational",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dtos.Operate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the message successfully create",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "Error Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do delete operational",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "groceries"
+                ],
+                "summary": "delete operational process",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "get id operational",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "delete operational successfully",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "Error Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/groceries/products": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do get all product",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "groceries"
+                ],
+                "summary": "GetAll product groceries process",
+                "responses": {}
+            },
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do create a product",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "groceries"
+                ],
+                "summary": "CreateProduct access process",
+                "parameters": [
+                    {
+                        "description": "create a product",
+                        "name": "product",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dtos.Product"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the message successfully create",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "Error Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/groceries/products/{id}": {
+            "put": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do update a product",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "groceries"
+                ],
+                "summary": "UpdateProduct access process",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id a product",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "update a product",
+                        "name": "product",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dtos.Product"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the message successfully create",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "Error Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do delete a product",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "groceries"
+                ],
+                "summary": "DeleteID product process",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "delete a product",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "delete a product",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "cookie not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/product/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do get id product",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "products"
+                ],
+                "summary": "GetID product process",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "get id product",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "get id category",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "cookies not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/products": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do get all product",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "products"
+                ],
+                "summary": "GetAll product process",
+                "responses": {
+                    "200": {
+                        "description": "get all category",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "cookies not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/products/category": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do get all category",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "products"
+                ],
+                "summary": "GetAll category process",
+                "responses": {
+                    "200": {
+                        "description": "get all category",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "cookies not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do create category",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "products"
+                ],
+                "summary": "create category process",
+                "parameters": [
+                    {
+                        "description": "create category",
+                        "name": "category",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dtos.CategoryProducts"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "create category successfully",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "Error Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/products/category/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do get id category",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "products"
+                ],
+                "summary": "GetID category process",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "get id category",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "get category",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "cookie not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do update category",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "products"
+                ],
+                "summary": "update category process",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "access id category",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "update category",
+                        "name": "category",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dtos.CategoryProducts"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "update category successfully",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "Error Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do delete a category",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "products"
+                ],
+                "summary": "DeleteID category process",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "delete size with category",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "get all size",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "cookie not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/products/size": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do get all size",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "products"
+                ],
+                "summary": "GetAll Size process",
+                "responses": {
+                    "200": {
+                        "description": "get all size",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "cookie not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do create size type",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "products"
+                ],
+                "summary": "create sizeType process",
+                "parameters": [
+                    {
+                        "description": "create sizetype",
+                        "name": "size",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dtos.SizeType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "create size type successfully",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "Error Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/products/size/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do get all size",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "products"
+                ],
+                "summary": "GetID Size process",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "get id size",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "get all size",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "cookie not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do get all size",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "products"
+                ],
+                "summary": "Update Size process",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "access id size type",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "update size type",
+                        "name": "name",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dtos.SizeType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "get all size",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "cookie not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do delete a size",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "products"
+                ],
+                "summary": "DeleteID Size process",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "delete size with id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "get all size",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "cookie not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/transactions/carts": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do get all carts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "GetAll carts process",
+                "responses": {
+                    "200": {
+                        "description": "get all transactions",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "not authorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do create a cart",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "CreateCart access process",
+                "parameters": [
+                    {
+                        "description": "create a cart",
+                        "name": "create",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dtos.Carts"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the message successfully create",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "Error Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/transactions/carts/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do get id carts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "GetID carts process",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "get id transaction",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "get id transaction",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do update cart",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "update cart process",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "access id transactions",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "update carts",
+                        "name": "transaction",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dtos.Carts"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "update transaction successfully",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "Error Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do delete a transaction",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "delete id transaction process",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "delete charts",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "delete successfully",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/transactions/checkout": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do Get All checkout",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Get All Checkout access process",
+                "responses": {
+                    "200": {
+                        "description": "message responses",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "not authorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do create a create checkout",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "CreateCheckout access process",
+                "responses": {
+                    "200": {
+                        "description": "message responses",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "not authorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/transactions/checkout/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do Get id checkout",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Get id Checkout access process",
+                "responses": {
+                    "200": {
+                        "description": "message responses",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "not authorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do update id checkout",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "update id Checkout access process",
+                "responses": {
+                    "200": {
+                        "description": "message responses",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "not authorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do delete id checkout",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "delete id Checkout access process",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "delete by id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "message responses",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.MessagesResponses"
+                        }
+                    },
+                    "400": {
+                        "description": "not authorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/transactions/orders": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do get all order",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Get All Order access process",
+                "responses": {}
+            },
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do create a order",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Create Orders access process",
+                "responses": {}
+            }
+        },
+        "/transactions/orders/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do get id order",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "Get id order access process",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "get id order",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "put": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do update id order",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "update id order access process",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "update id order",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "delete": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "do delete id order",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "delete id order access process",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "delete by id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        }
+    },
+    "definitions": {
+        "dtos.AuthCodeData": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "dtos.AuthData": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "dtos.AuthResetData": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "dtos.Carts": {
+            "type": "object",
+            "properties": {
+                "comments": {
+                    "type": "string"
+                },
+                "product_id": {
+                    "type": "integer"
+                },
+                "quantity": {
+                    "type": "integer"
+                },
+                "size_type_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dtos.CategoryProducts": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "dtos.MessagesResponses": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "dtos.Operate": {
+            "type": "object",
+            "properties": {
+                "active": {
+                    "type": "boolean"
+                },
+                "close": {
+                    "type": "string"
+                },
+                "day_operational": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "senin",
+                            "selasa",
+                            "rabu",
+                            "kamis",
+                            "jum'at",
+                            "sabtu",
+                            "minggu"
+                        ]
+                    }
+                },
+                "open": {
+                    "type": "string"
+                }
+            }
+        },
+        "dtos.Product": {
+            "type": "object",
+            "properties": {
+                "active": {
+                    "type": "boolean"
+                },
+                "buy_price": {
+                    "type": "integer"
+                },
+                "category_id": {
+                    "type": "integer"
+                },
+                "defective": {
+                    "type": "integer"
+                },
+                "min_retail_price": {
+                    "type": "integer"
+                },
+                "picture": {
+                    "type": "string"
+                },
+                "position": {
+                    "type": "string"
+                },
+                "product_code": {
+                    "type": "string"
+                },
+                "product_name": {
+                    "type": "string"
+                },
+                "quantity": {
+                    "type": "integer"
+                },
+                "size_type_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dtos.SizeType": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "dtos.UpdateGroup": {
+            "type": "object",
+            "properties": {
+                "groups": {
+                    "type": "string"
+                }
+            }
+        },
+        "dtos.Users": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "Bearer": {
+            "description": "Type \"Bearer\" followed by a space and JWT token.",
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}

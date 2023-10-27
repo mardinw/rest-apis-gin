@@ -1,0 +1,1227 @@
+definitions:
+  dtos.AuthCodeData:
+    properties:
+      code:
+        type: string
+      email:
+        type: string
+    type: object
+  dtos.AuthData:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  dtos.AuthResetData:
+    properties:
+      code:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  dtos.Carts:
+    properties:
+      comments:
+        type: string
+      product_id:
+        type: integer
+      quantity:
+        type: integer
+      size_type_id:
+        type: integer
+    type: object
+  dtos.CategoryProducts:
+    properties:
+      description:
+        type: string
+      name:
+        type: string
+    type: object
+  dtos.MessagesResponses:
+    properties:
+      message:
+        type: string
+    type: object
+  dtos.Operate:
+    properties:
+      active:
+        type: boolean
+      close:
+        type: string
+      day_operational:
+        items:
+          enum:
+          - senin
+          - selasa
+          - rabu
+          - kamis
+          - jum'at
+          - sabtu
+          - minggu
+          type: string
+        type: array
+      open:
+        type: string
+    type: object
+  dtos.Product:
+    properties:
+      active:
+        type: boolean
+      buy_price:
+        type: integer
+      category_id:
+        type: integer
+      defective:
+        type: integer
+      min_retail_price:
+        type: integer
+      picture:
+        type: string
+      position:
+        type: string
+      product_code:
+        type: string
+      product_name:
+        type: string
+      quantity:
+        type: integer
+      size_type_id:
+        type: integer
+    type: object
+  dtos.SizeType:
+    properties:
+      name:
+        type: string
+    type: object
+  dtos.UpdateGroup:
+    properties:
+      groups:
+        type: string
+    type: object
+  dtos.Users:
+    properties:
+      email:
+        type: string
+    type: object
+info:
+  contact:
+    email: cs@payuoge.com
+    name: API Support
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+paths:
+  /auth/add-user-groups:
+    post:
+      consumes:
+      - application/json
+      description: do add user to group
+      parameters:
+      - description: user add to group
+        in: body
+        name: addUserToGroup
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.UpdateGroup'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: user success to add group
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: Error Bad request
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: Add user to group process
+      tags:
+      - auth
+  /auth/confirm:
+    post:
+      consumes:
+      - application/json
+      description: do confirmation account
+      parameters:
+      - description: used for confirmation an account
+        in: body
+        name: confirmData
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.AuthCodeData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: redirect to home
+          schema:
+            type: string
+        "400":
+          description: Error Bad request
+          schema:
+            type: string
+      summary: Confirmation SignUp access process
+      tags:
+      - auth
+  /auth/forgot:
+    post:
+      consumes:
+      - application/json
+      description: do forgot password to an account
+      parameters:
+      - description: used for forgot password
+        in: body
+        name: forgotData
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.Users'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: send code confirmation for forgot password
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: Error Bad request
+          schema:
+            type: string
+      summary: ForgotPassword process
+      tags:
+      - auth
+  /auth/google:
+    get:
+      consumes:
+      - application/json
+      description: do logout account
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: logged in via google successfully
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: cookie not found
+          schema:
+            type: string
+      summary: Login google access process
+      tags:
+      - auth
+  /auth/list-groups:
+    get:
+      consumes:
+      - application/json
+      description: do list groups
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: list group
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: Error Bad request
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: list group process
+      tags:
+      - auth
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: do login account
+      parameters:
+      - description: login data
+        in: body
+        name: login
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.AuthData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: the message success responses
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: Error Bad request
+          schema:
+            type: string
+      summary: Login access process
+      tags:
+      - auth
+  /auth/logout:
+    get:
+      consumes:
+      - application/json
+      description: do logout account
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: logged out successfully
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: cookie not found
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: Logout access process
+      tags:
+      - auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: do register account
+      parameters:
+      - description: used for register
+        in: body
+        name: registerData
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.AuthData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: send code confirmation
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: Error Bad request
+          schema:
+            type: string
+      summary: Register access process
+      tags:
+      - auth
+  /auth/resend:
+    post:
+      consumes:
+      - application/json
+      description: do resend code to an account
+      parameters:
+      - description: used for resend code
+        in: body
+        name: resendCode
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.Users'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: check inbox email address
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: Error Bad request
+          schema:
+            type: string
+      summary: ResendCode process
+      tags:
+      - auth
+  /auth/reset:
+    post:
+      consumes:
+      - application/json
+      description: do reset password to an account
+      parameters:
+      - description: used for reset password
+        in: body
+        name: resetPassword
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.AuthResetData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: send for reset password
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: Error Bad request
+          schema:
+            type: string
+      summary: ResetPassword process
+      tags:
+      - auth
+  /groceries/operational:
+    get:
+      consumes:
+      - application/json
+      description: do Get all operational
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: the message successfully create
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: Error Bad Request
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: GetAllOperational access process
+      tags:
+      - groceries
+    post:
+      consumes:
+      - application/json
+      description: do create a operational
+      parameters:
+      - description: create a operational
+        in: body
+        name: operational
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.Operate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: the message successfully create
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: Error Bad Request
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: CreateOperational access process
+      tags:
+      - groceries
+  /groceries/operational/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: do delete operational
+      parameters:
+      - description: get id operational
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: delete operational successfully
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: Error Bad request
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: delete operational process
+      tags:
+      - groceries
+    get:
+      consumes:
+      - application/json
+      description: do Get ID operational
+      parameters:
+      - description: id operational
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses: {}
+      security:
+      - Bearer: []
+      summary: GetIDOperational access process
+      tags:
+      - groceries
+    put:
+      consumes:
+      - application/json
+      description: do Update a operational
+      parameters:
+      - description: id operational
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: update a operational
+        in: body
+        name: operational
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.Operate'
+      responses:
+        "200":
+          description: the message successfully create
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: Error Bad Request
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: UpdateOperational access process
+      tags:
+      - groceries
+  /groceries/products:
+    get:
+      consumes:
+      - application/json
+      description: do get all product
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - Bearer: []
+      summary: GetAll product groceries process
+      tags:
+      - groceries
+    post:
+      consumes:
+      - application/json
+      description: do create a product
+      parameters:
+      - description: create a product
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.Product'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: the message successfully create
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: Error Bad Request
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: CreateProduct access process
+      tags:
+      - groceries
+  /groceries/products/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: do delete a product
+      parameters:
+      - description: delete a product
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: delete a product
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: cookie not found
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: DeleteID product process
+      tags:
+      - groceries
+    put:
+      consumes:
+      - application/json
+      description: do update a product
+      parameters:
+      - description: id a product
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: update a product
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.Product'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: the message successfully create
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: Error Bad Request
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: UpdateProduct access process
+      tags:
+      - groceries
+  /product/{id}:
+    get:
+      consumes:
+      - application/json
+      description: do get id product
+      parameters:
+      - description: get id product
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: get id category
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: cookies not found
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: GetID product process
+      tags:
+      - products
+  /products:
+    get:
+      consumes:
+      - application/json
+      description: do get all product
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: get all category
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: cookies not found
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: GetAll product process
+      tags:
+      - products
+  /products/category:
+    get:
+      consumes:
+      - application/json
+      description: do get all category
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: get all category
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: cookies not found
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: GetAll category process
+      tags:
+      - products
+    post:
+      consumes:
+      - application/json
+      description: do create category
+      parameters:
+      - description: create category
+        in: body
+        name: category
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.CategoryProducts'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: create category successfully
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: Error Bad request
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: create category process
+      tags:
+      - products
+  /products/category/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: do delete a category
+      parameters:
+      - description: delete size with category
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: get all size
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: cookie not found
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: DeleteID category process
+      tags:
+      - products
+    get:
+      consumes:
+      - application/json
+      description: do get id category
+      parameters:
+      - description: get id category
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: get category
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: cookie not found
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: GetID category process
+      tags:
+      - products
+    put:
+      consumes:
+      - application/json
+      description: do update category
+      parameters:
+      - description: access id category
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: update category
+        in: body
+        name: category
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.CategoryProducts'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: update category successfully
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: Error Bad request
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: update category process
+      tags:
+      - products
+  /products/size:
+    get:
+      consumes:
+      - application/json
+      description: do get all size
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: get all size
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: cookie not found
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: GetAll Size process
+      tags:
+      - products
+    post:
+      consumes:
+      - application/json
+      description: do create size type
+      parameters:
+      - description: create sizetype
+        in: body
+        name: size
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.SizeType'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: create size type successfully
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: Error Bad request
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: create sizeType process
+      tags:
+      - products
+  /products/size/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: do delete a size
+      parameters:
+      - description: delete size with id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: get all size
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: cookie not found
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: DeleteID Size process
+      tags:
+      - products
+    get:
+      consumes:
+      - application/json
+      description: do get all size
+      parameters:
+      - description: get id size
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: get all size
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: cookie not found
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: GetID Size process
+      tags:
+      - products
+    put:
+      consumes:
+      - application/json
+      description: do get all size
+      parameters:
+      - description: access id size type
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: update size type
+        in: body
+        name: name
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.SizeType'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: get all size
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: cookie not found
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: Update Size process
+      tags:
+      - products
+  /transactions/carts:
+    get:
+      consumes:
+      - application/json
+      description: do get all carts
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: get all transactions
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: not authorized
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: GetAll carts process
+      tags:
+      - transactions
+    post:
+      consumes:
+      - application/json
+      description: do create a cart
+      parameters:
+      - description: create a cart
+        in: body
+        name: create
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.Carts'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: the message successfully create
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: Error Bad Request
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: CreateCart access process
+      tags:
+      - transactions
+  /transactions/carts/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: do delete a transaction
+      parameters:
+      - description: delete charts
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: delete successfully
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: unauthorized
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: delete id transaction process
+      tags:
+      - transactions
+    get:
+      consumes:
+      - application/json
+      description: do get id carts
+      parameters:
+      - description: get id transaction
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: get id transaction
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: unauthorized
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: GetID carts process
+      tags:
+      - transactions
+    put:
+      consumes:
+      - application/json
+      description: do update cart
+      parameters:
+      - description: access id transactions
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: update carts
+        in: body
+        name: transaction
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.Carts'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: update transaction successfully
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: Error Bad request
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: update cart process
+      tags:
+      - transactions
+  /transactions/checkout:
+    get:
+      consumes:
+      - application/json
+      description: do Get All checkout
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: message responses
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: not authorized
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: Get All Checkout access process
+      tags:
+      - transactions
+    post:
+      consumes:
+      - application/json
+      description: do create a create checkout
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: message responses
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: not authorized
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: CreateCheckout access process
+      tags:
+      - transactions
+  /transactions/checkout/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: do delete id checkout
+      parameters:
+      - description: delete by id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: message responses
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: not authorized
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: delete id Checkout access process
+      tags:
+      - transactions
+    get:
+      consumes:
+      - application/json
+      description: do Get id checkout
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: message responses
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: not authorized
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: Get id Checkout access process
+      tags:
+      - transactions
+    put:
+      consumes:
+      - application/json
+      description: do update id checkout
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: message responses
+          schema:
+            $ref: '#/definitions/dtos.MessagesResponses'
+        "400":
+          description: not authorized
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: update id Checkout access process
+      tags:
+      - transactions
+  /transactions/orders:
+    get:
+      consumes:
+      - application/json
+      description: do get all order
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - Bearer: []
+      summary: Get All Order access process
+      tags:
+      - transactions
+    post:
+      consumes:
+      - application/json
+      description: do create a order
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - Bearer: []
+      summary: Create Orders access process
+      tags:
+      - transactions
+  /transactions/orders/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: do delete id order
+      parameters:
+      - description: delete by id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - Bearer: []
+      summary: delete id order access process
+      tags:
+      - transactions
+    get:
+      consumes:
+      - application/json
+      description: do get id order
+      parameters:
+      - description: get id order
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - Bearer: []
+      summary: Get id order access process
+      tags:
+      - transactions
+    put:
+      consumes:
+      - application/json
+      description: do update id order
+      parameters:
+      - description: update id order
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - Bearer: []
+      summary: update id order access process
+      tags:
+      - transactions
+securityDefinitions:
+  Bearer:
+    description: Type "Bearer" followed by a space and JWT token.
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

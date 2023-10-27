@@ -1,0 +1,11 @@
+midtrans_secret.txt
+secret_api_key.csv
+payuvm.pem
+/scripts/.terraform/
+.env
+.env.prod
+/scripts/*.tfstate
+/scripts/*.tfstate.backup
+/scripts/.terraform.*
+.terraform
+server.txt
