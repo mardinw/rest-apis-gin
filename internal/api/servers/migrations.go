@@ -46,7 +46,7 @@ func Migrate(db *sql.DB) error {
 		}
 	} else {
 		migrator, err := migrate.NewWithDatabaseInstance(
-			"file:///home/petromax/Public/go/src/gitlab.com/rest-apis/db/migrations",
+			"file:///home/petr0max/Public/go/src/github.com/rest-apis/db/migrations",
 			"postgres", driver,
 		)
 		if err != nil {
